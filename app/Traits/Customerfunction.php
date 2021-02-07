@@ -111,8 +111,7 @@ trait Customerfunction
     // get customer by id
     public function getCustomerById($id)
     {
-        $customer = branchCustomer::select('*')
-        ->where('id',$id)
+        $customer = branchCustomer::where('id',$id)
         ->first();
         if ($customer) {
             $type =  $this->getCustomerTypeById($customer->type_id)->original['data'];
@@ -213,8 +212,7 @@ trait Customerfunction
    public function getCustomerInfo($search,$branchId,$page)
    {
         $page = $page *10;
-        $branchCustomer = branchCustomer::select('*')
-        ->where('branch_id',$branchId)
+        $branchCustomer = branchCustomer::where('branch_id',$branchId)
         ->where(function($q) use ($search) {
         $q->where('phone','LIKE',"%".str_ireplace("%20"," ", $search)."%")
             ->orWhere('name','LIKE',"%".str_ireplace("%20"," ", $search)."%");

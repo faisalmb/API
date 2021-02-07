@@ -12,8 +12,7 @@ trait Cityfunction
     // get city by id
     public function cityById($id)
     {
-        $city = city::select('*')
-        ->where('id',$id)
+        $city = city::where('id',$id)
         ->first();
 
         if ($city) {
@@ -145,8 +144,7 @@ trait Cityfunction
     public function citiesByInfoAndPage($page,$stateId,$search)
     {
         $page=$page*20;
-        $city = city::select('*')
-        ->where('state_id',$stateId)
+        $city = city::where('state_id',$stateId)
         ->where(function($q) use ($search) {
             $q->where('name','LIKE',"%".str_ireplace("%20"," ", $search)."%")
               ->orWhere('ename','LIKE',"%".str_ireplace("%20"," ", $search)."%");

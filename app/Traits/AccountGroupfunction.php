@@ -14,8 +14,7 @@ trait AccountGroupfunction
     // get master group by id 
     public function masterGroupById($id)
     {
-        $masterGroup = accountMasterGroup::select('*')
-        ->where('id',$id)
+        $masterGroup = accountMasterGroup::where('id',$id)
         ->first();
 
         if ($masterGroup) {
@@ -29,8 +28,7 @@ trait AccountGroupfunction
     // get all master group in sys
     public function allMasterGroup()
     {
-        $masterGroup = accountMasterGroup::select('*')
-        ->get();
+        $masterGroup = accountMasterGroup::get();
 
         if ($masterGroup) {
             return $this->generalResponse(true, 200,'success', null,$masterGroup);
@@ -43,8 +41,7 @@ trait AccountGroupfunction
     // add master group to sys by sysadmin
     public function addMasterGroup($name,$ename,$tage,$code)
     {
-        $masterGroup = accountMasterGroup::select('*')
-        ->where('tag',$tage)
+        $masterGroup = accountMasterGroup::where('tag',$tage)
         ->orWhere('name',$name)
         ->orWhere('ename',$ename)
         ->orWhere('code',$code)
@@ -75,8 +72,7 @@ trait AccountGroupfunction
     // update master group to sys by sysadmin
     public function editMasterGroup($id,$name,$ename,$tage,$code)
     {
-        $masterGroup = accountMasterGroup::select('*')
-        ->where('tag',$tage)
+        $masterGroup = accountMasterGroup::where('tag',$tage)
         ->orWhere('name',$name)
         ->orWhere('ename',$ename)
         ->orWhere('code',$code)
@@ -113,8 +109,7 @@ trait AccountGroupfunction
     // get sub group by id 
     public function subGroupById($id)
     {
-        $accountSubGroup = accountSubGroup::select('*')
-        ->where('id',$id)
+        $accountSubGroup = accountSubGroup::where('id',$id)
         ->first();
 
         if ($accountSubGroup) {
@@ -128,8 +123,7 @@ trait AccountGroupfunction
     // get all master group in branch with sub
     public function allMasterWithSubGroup($branchId)
     {
-        $masterGroup = accountMasterGroup::select('*')
-        ->get();
+        $masterGroup = accountMasterGroup::get();
 
         $masterResult = array();
         if (!empty($masterGroup)) {
@@ -197,8 +191,7 @@ trait AccountGroupfunction
     public function allSubGroup($branchId,$id)
     {
  
-        $accountSubGroup = accountSubGroup::select('*')
-        ->where('branch_id',$branchId)
+        $accountSubGroup = accountSubGroup::where('branch_id',$branchId)
         ->where('parent_id',$id)
         ->get();
         if (!empty($accountSubGroup)) {
@@ -238,8 +231,7 @@ trait AccountGroupfunction
     // add master sub group to branch
     public function addMasterSubGroup($branchId,$masterId/*,$parentId*/,$name,$ename,$tage,$code)
     {
-        $accountSubGroup = accountSubGroup::select('*')
-        ->where('branch_id',$tage)
+        $accountSubGroup = accountSubGroup::where('branch_id',$tage)
         ->where('tag',$tage)
         ->orWhere('name',$name)
         ->orWhere('ename',$ename)

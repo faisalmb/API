@@ -12,8 +12,7 @@ trait ItemCategoryfunction
     // get itemCategory by id
     public function itemCategoryById($id)
     {
-        $itemCategory = itemCategory::select('*')
-        ->where('id',$id)
+        $itemCategory = itemCategory::where('id',$id)
         ->first();
 
         if ($itemCategory) {
@@ -27,8 +26,7 @@ trait ItemCategoryfunction
     public function addItemCategory($companyId,$name, $ename, $info)
     {
         // $companyId = $this->getBranch($branchId)->original['data']->company_id;
-        $itemCategory = itemCategory::select('*')
-        ->where('company_id',$companyId)
+        $itemCategory = itemCategory::where('company_id',$companyId)
         ->where('name',$name)
         ->orWhere('ename',$ename)
         ->first();
@@ -55,8 +53,7 @@ trait ItemCategoryfunction
     // update cuntry function
     public function updateItemCategory($id,$companyId,$name, $ename, $info,$IsActive)
     {
-        $itemCategory = itemCategory::select('*')
-        ->where('company_id',$companyId)
+        $itemCategory = itemCategory::where('company_id',$companyId)
         ->where('name',$name)
         ->orWhere('ename',$ename)
         ->first();

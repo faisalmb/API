@@ -152,8 +152,7 @@ trait Genralfunction {
       public function checktoken($request)
       {
         $checktoken = $this-> bearerToken($request);
-        $user = user::select('*')
-        ->where('token', $checktoken)
+        $user = user::where('token', $checktoken)
         ->first();
         return $user;
       }
@@ -164,8 +163,7 @@ trait Genralfunction {
       public function checkResetToken($request)
       {
         $checktoken = $this-> bearerToken($request);
-        $user = user::select('*')
-        ->where('recover', $checktoken)
+        $user = user::where('recover', $checktoken)
         ->first();
         return $user;
       }

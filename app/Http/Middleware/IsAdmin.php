@@ -22,8 +22,7 @@ class IsAdmin
         $isAdmin = false;
         $userId = $this->checktoken($request)->id;
         $companyId = $this->checkHeadersCompanyId($request)->content;
-        $companyUser = companyUser::select('*')
-        ->where('user_id', $userId)
+        $companyUser = companyUser::where('user_id', $userId)
         ->where('company_id', $companyId)
         ->first();
         if ($companyUser) {

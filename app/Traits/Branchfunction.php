@@ -17,8 +17,7 @@ trait Branchfunction
     // get Branch by id
   public function getBranch($id)
   {
-        $branch = branch::select('*')
-        ->where('id', $id)
+        $branch = branch::where('id', $id)
         ->first();
        
         if ($branch) {
@@ -81,8 +80,7 @@ trait Branchfunction
   public function getBranchesByPage($page,$companyId)
   {
         $page = $page *10;
-        $branch = branch::select('*')
-        ->where('company_id',$companyId)
+        $branch = branch::where('company_id',$companyId)
         ->skip($page)
         ->take(10)
         ->get();
@@ -105,8 +103,7 @@ trait Branchfunction
   public function getMyBranchUserByPage($page,$branchId)
   {
         $page = $page *10;
-        $branchUser = branchUser::select('*')
-        ->where('branch_id', $branchId)
+        $branchUser = branchUser::where('branch_id', $branchId)
         ->skip($page)
         ->take(10)
         ->get();

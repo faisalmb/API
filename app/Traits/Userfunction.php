@@ -234,8 +234,7 @@ trait Userfunction {
         
       // $userId = $this->generateId();
       $phone = $country->phoneCode.$phone;
-      $user = user::select('*')
-        ->where('phone', $phone)
+      $user = user::where('phone', $phone)
         ->first();
         if (!$user) {
           $id = user::create(
@@ -369,8 +368,7 @@ trait Userfunction {
         $n = 6;
         $otp= $this->generateNumericOTP($n);
         $recover=hash('sha256',mt_rand(10,999999).$otp);
-        $user = user::select('*')
-        ->where('id',$userId)->first();
+        $user = user::where('id',$userId)->first();
         if ($user) {
          $recoverUpdate = user::where('id', $user->id)
             ->update(['recover' => $recover,'otp' => $otp]);

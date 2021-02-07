@@ -16,8 +16,7 @@ trait Companyfunction {
   // get Company by id
   public function getCompany($id)
   {
-        $company = company::select('*')
-        ->where('id', $id)
+        $company = company::where('id', $id)
         ->first();
 
        
@@ -93,8 +92,7 @@ trait Companyfunction {
   public function getCompaniesByPage($page)
   {
         $page = $page *10;
-        $company = company::select('*')
-        ->skip($page)
+        $company = company::skip($page)
         ->take(10)
         ->get();
         $result = array();
@@ -116,8 +114,7 @@ trait Companyfunction {
   public function getMyCompanyUserByPage($page,$companyId)
   {
         $page = $page *10;
-        $companyUser = companyUser::select('*')
-        ->where('company_id', $companyId)
+        $companyUser = companyUser::where('company_id', $companyId)
         ->skip($page)
         ->take(10)
         ->get();
@@ -289,11 +286,9 @@ trait Companyfunction {
     public function addCompanyBySysAdmin($adminId,$userId,$name,$countryId,$stateId,$cityId,$address,$taxNumber,$primaryPhone,$activityId)
     {
       $companyId = $this->generateId();
-      $company = company::select('*')
-        ->where('tax_number', $taxNumber)
+      $company = company::where('tax_number', $taxNumber)
         ->first();
-        $companyPhoneCheck = companyPhone::select('*')
-        ->where('phone', $primaryPhone)
+        $companyPhoneCheck = companyPhone::where('phone', $primaryPhone)
         ->first();
         if (!$company && !$companyPhoneCheck) {
           $createId = company::create(

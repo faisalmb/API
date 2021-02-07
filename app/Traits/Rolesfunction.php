@@ -12,8 +12,7 @@ trait Rolesfunction
     // get role by id
     public function roleById($id)
     {
-        $role = role::select('*')
-        ->where('id',$id)
+        $role = role::where('id',$id)
         ->first();
 
         if ($role) {
@@ -26,8 +25,7 @@ trait Rolesfunction
     // add role function
     public function addRole($name, $shortName, $description, $code)
     {
-        $role = role::select('*')
-        ->where('name',$name)
+        $role = role::where('name',$name)
         ->orWhere('short_name',$shortName)
         ->orWhere('code',$code)
         ->first();
@@ -53,8 +51,7 @@ trait Rolesfunction
     // update Role function
     public function updateRole($id,$name, $shortName, $description, $code,$IsActive)
     {
-        $role = role::select('*')
-        ->where('name',$name)
+        $role = role::where('name',$name)
         ->orWhere('short_name',$shortName)
         ->orWhere('code',$code)
         ->first();
@@ -111,8 +108,7 @@ trait Rolesfunction
     public function rolesByInfoAndPage($page,$search)
     {
         $page=$page*20;
-        $role = role::select('*')
-        ->where(function($q) use ($search) {
+        $role = role::where(function($q) use ($search) {
             $q->where('name','LIKE',"%".str_ireplace("%20"," ", $search)."%")
               ->orWhere('short_name','LIKE',"%".str_ireplace("%20"," ", $search)."%")
               ->orWhere('code','LIKE',"%".str_ireplace("%20"," ", $search)."%");
@@ -133,8 +129,7 @@ trait Rolesfunction
     // add role to company function
     public function addRoleToUser($roleId, $branchUserId)
     {
-        $role = branchUserRole::select('*')
-        ->where('role_id',$roleId)
+        $role = branchUserRole::where('role_id',$roleId)
         ->orWhere('branch_user_id',$branchUserId)
         ->first();
         if (!$role) {

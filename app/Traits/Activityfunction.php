@@ -11,8 +11,7 @@ trait Activityfunction
     // get activity by id
     public function activityById($id)
     {
-        $activity = activity::select('*')
-        ->where('id',$id)
+        $activity = activity::where('id',$id)
         ->first();
 
         if ($activity) {
@@ -25,8 +24,7 @@ trait Activityfunction
     // add activity function
     public function addActivity($name, $ename, $info)
     {
-        $activity = activity::select('*')
-        ->where('name',$name)
+        $activity = activity::where('name',$name)
         ->orWhere('ename',$ename)
         ->first();
         if (!$activity) {
@@ -51,8 +49,7 @@ trait Activityfunction
     // update cuntry function
     public function updateActivity($id,$name, $ename, $info,$IsActive)
     {
-        $activity = activity::select('*')
-        ->where('name',$name)
+        $activity = activity::where('name',$name)
         ->orWhere('ename',$ename)
         ->first();
 
@@ -108,8 +105,7 @@ trait Activityfunction
     public function activitiesByInfoAndPage($page,$search)
     {
         $page=$page*20;
-        $activity = activity::select('*')
-        ->where(function($q) use ($search) {
+        $activity = activity::where(function($q) use ($search) {
             $q->where('name','LIKE',"%".str_ireplace("%20"," ", $search)."%")
               ->orWhere('ename','LIKE',"%".str_ireplace("%20"," ", $search)."%");
               })
@@ -129,8 +125,7 @@ trait Activityfunction
     // add activity to company function
     public function addActivityToCompany($activityId, $companyId)
     {
-        $activity = companyActivity::select('*')
-        ->where('activity_id',$activityId)
+        $activity = companyActivity::where('activity_id',$activityId)
         ->orWhere('company_id',$companyId)
         ->first();
         if (!$activity) {

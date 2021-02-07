@@ -15,8 +15,7 @@ trait Unitfunction
     // get category by id
     public function categoryById($id)
     {
-        $unitCategory = unitCategory::select('*')
-        ->where('id',$id)
+        $unitCategory = unitCategory::where('id',$id)
         ->first();
 
         if ($unitCategory) {
@@ -30,8 +29,7 @@ trait Unitfunction
     public function categoryByPage($page)
     {
         $page = $page *10;
-        $unitCategory = unitCategory::select('*')
-        ->skip($page)
+        $unitCategory = unitCategory::skip($page)
         ->take(10)
         ->get();
 
@@ -46,8 +44,7 @@ trait Unitfunction
     public function categoryByPageAndInfo($search,$page)
     {
         $page = $page *10;
-        $unitCategory = unitCategory::select('*')
-        ->where(function($q) use ($search) {
+        $unitCategory = unitCategory::where(function($q) use ($search) {
             $q->where('name','LIKE',"%".str_ireplace("%20"," ", $search)."%")
               ->orWhere('ename','LIKE',"%".str_ireplace("%20"," ", $search)."%");
               })
@@ -93,8 +90,7 @@ trait Unitfunction
     // add category for unit by sys admin
     public function addUnitCategory($name, $ename, $info)
     {
-        $unitCategory = unitCategory::select('*')
-        ->where('name',$name)
+        $unitCategory = unitCategory::where('name',$name)
         ->orWhere('ename',$ename)
         ->first();
         if (!$unitCategory) {
@@ -162,8 +158,7 @@ trait Unitfunction
     // get unit by id
     public function unitById($id)
     {
-        $unit = unit::select('*')
-        ->where('id',$id)
+        $unit = unit::where('id',$id)
         ->first();
 
         if ($unit) {
@@ -177,8 +172,7 @@ trait Unitfunction
     public function unitByPage($page)
     {
         $page = $page *10;
-        $unit = unit::select('*')
-        ->skip($page)
+        $unit = unit::skip($page)
         ->take(10)
         ->get();
 
@@ -192,8 +186,7 @@ trait Unitfunction
     public function unitByCategoryIdAndPage($categoryId,$page)
     {
         $page = $page *10;
-        $unit = unit::select('*')
-        ->where('category_id',$categoryId)
+        $unit = unit::where('category_id',$categoryId)
         ->skip($page)
         ->take(10)
         ->get();
@@ -209,8 +202,7 @@ trait Unitfunction
     public function unitByPageAndInfo($search,$page)
     {
         $page = $page *10;
-        $unit = unit::select('*')
-        ->where(function($q) use ($search) {
+        $unit = unit::where(function($q) use ($search) {
             $q->where('name','LIKE',"%".str_ireplace("%20"," ", $search)."%")
               ->orWhere('ename','LIKE',"%".str_ireplace("%20"," ", $search)."%");
               })
@@ -230,8 +222,7 @@ trait Unitfunction
     public function unitByPageAndInfoAndCategoryId($categoryId,$search,$page)
     {
         $page = $page *10;
-        $unit = unit::select('*')
-        ->where('category_id',$categoryId)
+        $unit = unit::where('category_id',$categoryId)
         ->where(function($q) use ($search) {
             $q->where('name','LIKE',"%".str_ireplace("%20"," ", $search)."%")
               ->orWhere('ename','LIKE',"%".str_ireplace("%20"," ", $search)."%");
@@ -279,8 +270,7 @@ trait Unitfunction
     // add unit  by sys admin
     public function addUnit($categoryId,$name, $ename, $info)
     {
-        $unit = unit::select('*')
-        ->where('category_id',$categoryId)
+        $unit = unit::where('category_id',$categoryId)
         ->where('name',$name)
         ->orWhere('ename',$ename)
         ->first();

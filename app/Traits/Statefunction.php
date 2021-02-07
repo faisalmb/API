@@ -13,8 +13,7 @@ trait Statefunction
     // get state by id
     public function stateById($id)
     {
-        $state = state::select('*')
-        ->where('id',$id)
+        $state = state::where('id',$id)
         ->first();
 
         
@@ -142,8 +141,7 @@ trait Statefunction
     public function statesByInfoAndPage($page,$countryId,$search)
     {
         $page=$page*20;
-        $state = state::select('*')
-        ->where('country_id',$countryId)
+        $state = state::where('country_id',$countryId)
         ->where(function($q) use ($search) {
             $q->where('name','LIKE',"%".str_ireplace("%20"," ", $search)."%")
               ->orWhere('ename','LIKE',"%".str_ireplace("%20"," ", $search)."%");

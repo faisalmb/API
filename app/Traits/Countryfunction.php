@@ -11,8 +11,7 @@ trait Countryfunction
     // get country by id
     public function countryById($id)
     {
-        $country = country::select('*')
-        ->where('id',$id)
+        $country = country::where('id',$id)
         ->first();
 
         if ($country) {
@@ -25,8 +24,7 @@ trait Countryfunction
     // add country function
     public function addCountry($name, $ename, $code, $phoneCode)
     {
-        $country = country::select('*')
-        ->where('name',$name)
+        $country = country::where('name',$name)
         ->orWhere('ename',$ename)
         ->first();
         if (!$country) {
@@ -52,8 +50,7 @@ trait Countryfunction
     // update cuntry function
     public function updateCountry($id,$name, $ename, $code, $phoneCode,$IsActive)
     {
-        $country = country::select('*')
-        ->where('name',$name)
+        $country = country::where('name',$name)
         ->orWhere('ename',$ename)
         ->orWhere('code',$code)
         ->orWhere('phoneCode',$phoneCode)
@@ -111,8 +108,7 @@ trait Countryfunction
     public function countriesByInfoAndPage($page,$search)
     {
         $page=$page*20;
-        $country = country::select('*')
-        ->where(function($q) use ($search) {
+        $country = country::where(function($q) use ($search) {
             $q->where('name','LIKE',"%".str_ireplace("%20"," ", $search)."%")
               ->orWhere('ename','LIKE',"%".str_ireplace("%20"," ", $search)."%")
               ->orWhere('code','LIKE',"%".str_ireplace("%20"," ", $search)."%")

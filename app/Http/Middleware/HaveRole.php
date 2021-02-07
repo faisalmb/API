@@ -31,8 +31,7 @@ class HaveRole
         }
         
         
-        $branchUser = branchUser::select('*')
-        ->where('user_id', $userId)
+        $branchUser = branchUser::where('user_id', $userId)
         ->where('branch_id', $branchId)
         ->first();
         if ($branchUser) {

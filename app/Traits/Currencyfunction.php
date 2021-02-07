@@ -44,8 +44,7 @@ trait Currencyfunction
        // get Currency by id
   public function getCurrency($id)
   {
-        $currency = currency::select('*')
-        ->where('id', $id)
+        $currency = currency::where('id', $id)
         ->first();
         if ($currency) {
           return $this->generalResponse(true,200,'success', null,$currency);
@@ -117,8 +116,7 @@ trait Currencyfunction
     public function addCurrencyToCompany($companyId,$currencyId)
     {
         
-        $companyCurrencies = companyCurrencies::select('*')
-        ->where('company_id', $companyId)
+        $companyCurrencies = companyCurrencies::where('company_id', $companyId)
         ->where('currency_id', $currencyId)
         ->first();
         
